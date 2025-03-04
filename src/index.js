@@ -4,7 +4,11 @@ class List {
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.status = stauts;
+        this.status = status;
+    }
+    
+    set status(status){
+        this.status = status;
     }
 
     display() {
