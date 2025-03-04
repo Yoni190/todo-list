@@ -7,7 +7,7 @@ class List {
         this.status = status;
     }
     
-    set status(status){
+    set stat(status){
         this.status = status;
     }
 
