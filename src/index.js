@@ -1,14 +1,14 @@
 class List {
-    constructor(title, description, dueDate, priority, status){
+    constructor(title, description, dueDate, priority){
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.status = status;
+        this.status = "Not Completed";
     }
     
-    set stat(status){
-        this.status = status;
+    setComplete(){
+        this.status = "Completed";
     }
 
     display() {
