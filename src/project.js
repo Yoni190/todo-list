@@ -1,8 +1,17 @@
-class Project {
-    constructor(name, list){
+export default class Project {
+    constructor(name){
         this.name = name;
-        this.lists.add(list);
+        this.lists = [];
+    }
+
+    addList(list){
+        this.lists.push(list);
+    }
+
+    displayLists(){
+        this.lists.forEach((list)=>{
+            console.log(list.title)
+        })
     }
 }
 
-const inbox = new Project('inbox');
