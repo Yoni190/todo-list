@@ -1,6 +1,9 @@
 import Project from "./project.js"
+import "./style.css"
 
 class List {
+
+    //Future Note: Find way to insert class instance to a project inside this class
     constructor(title, description, dueDate, priority){
         this.title = title;
         this.description = description;

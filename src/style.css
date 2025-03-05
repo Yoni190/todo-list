@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+header, footer, #sidebar, #lists {
+    border: 1px solid black;
+}
+
+header, footer,#sidebar {
+    padding: 15px;
+}
+
+header {
+    background-color: lightsalmon;
+}
+
+main{
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+}
+
+
+#sidebar {
+    background-color: #ffd8d8;
+    text-align: center;
+    height: 100vh;
+
+}
+
+ul {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+footer {
+    background-color: lightsalmon;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+}
