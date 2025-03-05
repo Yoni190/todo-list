@@ -9,11 +9,8 @@ a{
     color: black;
 }
 
-header, footer, #sidebar, #lists {
+header, footer, #sidebar, #projects, .cards {
     border: 1px solid black;
-}
-
-header, footer,#sidebar {
     padding: 15px;
 }
 
@@ -47,4 +44,15 @@ footer {
     width: 100%;
     bottom: 0;
     text-align: center;
+}
+
+#projects {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.cards {
+    text-align: center;
+    border-radius: 20px;
 }

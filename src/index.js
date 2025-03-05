@@ -1,6 +1,8 @@
 import Project from "./project.js"
 import "./style.css"
 
+export const projects = [];
+
 class List {
 
     //Future Note: Find way to insert class instance to a project inside this class
@@ -22,6 +24,13 @@ class List {
 }
 
 const inbox = new Project('inbox');
+const test = new Project('test');
+projects.push(inbox);
+projects.push(test);
+projects.push(inbox);
+projects.push(test);
+projects.push(inbox);
+projects.push(test);
 
 const list1 = new List('Jog', "Jog in the morning", 'Tomorrow', 1);
 const list2 = new List('Shopping', "Go buy fruits", 'Today', 2);
