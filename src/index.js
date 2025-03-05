@@ -1,6 +1,8 @@
 import Project from "./project.js"
 import "./style.css"
 
+
+//Change array to object and assign the name of the project as the key
 export const projects = [];
 
 class List {
