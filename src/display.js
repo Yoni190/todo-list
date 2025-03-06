@@ -4,7 +4,7 @@ const display = (()=>{
     const container = document.querySelector('#projects');
     const nav = document.querySelector('ul');
 
-    for(let i = 0; i < projects.length; i++){
+    for(let i = 0; i < Object.keys(projects).length; i++){
         const card = document.createElement('div');
         card.className = 'cards';
 
@@ -12,13 +12,16 @@ const display = (()=>{
         // card.innerHTML = projectTitle;
         // container.appendChild(card);
 
-        const projectLink = document.createElement('a');
+        const projectTab = document.createElement('button');
         const projectList = document.createElement('li');
 
-        projectLink.href = '#';
-        projectLink.innerHTML = projects[i].name;
+        projectTab.innerHTML = Object.values(projects)[i].name;
 
-        projectList.appendChild(projectLink);
+        projectTab.addEventListener('click', ()=>{
+            
+        })
+
+        projectList.appendChild(projectTab);
         nav.appendChild(projectList);
     }
 

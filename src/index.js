@@ -3,7 +3,7 @@ import "./style.css"
 
 
 //Change array to object and assign the name of the project as the key
-export const projects = [];
+export const projects = {};
 
 class List {
 
@@ -27,12 +27,15 @@ class List {
 
 const inbox = new Project('inbox');
 const test = new Project('test');
-projects.push(inbox);
-projects.push(test);
-projects.push(inbox);
-projects.push(test);
-projects.push(inbox);
-projects.push(test);
+projects[inbox.name] = inbox;
+projects[test.name] = test;
+
+// projects.push(inbox);
+// projects.push(test);
+// projects.push(inbox);
+// projects.push(test);
+// projects.push(inbox);
+// projects.push(test);
 
 const list1 = new List('Jog', "Jog in the morning", 'Tomorrow', 1);
 const list2 = new List('Shopping', "Go buy fruits", 'Today', 2);
