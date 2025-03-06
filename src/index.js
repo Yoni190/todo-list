@@ -45,5 +45,5 @@ inbox.addList(list1)
 inbox.addList(list2)
 inbox.addList(list3)
 
-inbox.displayLists()
+test.addList(list3)
 

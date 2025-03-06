@@ -12,7 +12,7 @@ a{
     color: black;
 }
 
-header, footer, #sidebar, #projects, .cards {
+header, footer, #sidebar, #lists, .cards {
     border: 1px solid black;
     padding: 15px;
 }
@@ -49,13 +49,13 @@ footer {
     text-align: center;
 }
 
-#projects {
+#lists {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
 
-.cards {
+.card {
     text-align: center;
     border-radius: 20px;
 }
