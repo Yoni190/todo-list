@@ -28,9 +28,11 @@ const display = (()=>{
         })
 
         //create todo
-        const todoButton = document.querySelector('create-todo');
+        const todoButton = document.querySelector('#create-todo');
+        const todoDialog = document.querySelector('#todo-dialog');
+        const form = document.querySelector('form');
         todoButton.addEventListener('click', ()=>{
-            
+            todoDialog.showModal();
         })
 
         projectList.appendChild(projectTab);
