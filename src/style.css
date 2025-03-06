@@ -12,7 +12,7 @@ a{
     color: black;
 }
 
-header, footer, #sidebar, #lists, .cards {
+header, footer, #sidebar, #lists, .card {
     border: 1px solid black;
     padding: 15px;
 }
@@ -30,12 +30,9 @@ main{
 #sidebar {
     background-color: #ffd8d8;
     text-align: center;
-    height: 100vh;
-
 }
 
 ul {
-    height: 100vh;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -51,7 +48,7 @@ footer {
 
 #lists {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 15%));
     gap: 10px;
 }
 

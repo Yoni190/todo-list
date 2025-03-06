@@ -27,6 +27,12 @@ const display = (()=>{
             })
         })
 
+        //create todo
+        const todoButton = document.querySelector('create-todo');
+        todoButton.addEventListener('click', ()=>{
+            
+        })
+
         projectList.appendChild(projectTab);
         nav.appendChild(projectList);
     }
