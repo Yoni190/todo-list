@@ -22,7 +22,7 @@ const display = (()=>{
             project.lists.forEach((list)=>{
                 const card = document.createElement('div');
                 card.className = 'card';
-                card.innerHTML = list.title;
+                card.innerHTML = `Title: ${list.title} <br> Due Date: ${list.dueDate}`;
                 lists.appendChild(card);
             })
         })
