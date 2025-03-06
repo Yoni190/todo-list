@@ -1,4 +1,5 @@
 import {projects} from "./index.js"
+import Project from "./project.js"
 
 const display = (()=>{
     const lists = document.querySelector('#lists');
@@ -47,6 +48,14 @@ const display = (()=>{
                 todoDialog.close();
                 projectDialog.close();
             })
+        });
+
+        //No access to project class
+        const createProject = document.querySelector('#project-creation');
+        createProject.addEventListener('click', ()=>{
+            const projectTitle = document.querySelector('#project-title').value;
+            const newProject = new Project(projectTitle);
+            projects[projectTitle] = newProject;
         })
 
         projectList.appendChild(projectTab);
