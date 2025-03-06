@@ -35,6 +35,20 @@ const display = (()=>{
             todoDialog.showModal();
         })
 
+        const projectButton = document.querySelector('#create-project');
+        const projectDialog = document.querySelector('#project-dialog');
+        projectButton.addEventListener('click', ()=>{
+            projectDialog.showModal();
+        })
+
+        const cancelButton = document.querySelectorAll('.cancel');
+        cancelButton.forEach((button)=>{
+            button.addEventListener('click', ()=>{
+                todoDialog.close();
+                projectDialog.close();
+            })
+        })
+
         projectList.appendChild(projectTab);
         nav.appendChild(projectList);
     }
