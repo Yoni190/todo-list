@@ -4,6 +4,8 @@ import Project from "./project.js"
 const displayProjects = ()=>{
     const lists = document.querySelector('#lists');
     const nav = document.querySelector('ul');
+    nav.innerHTML = '<li><button id="create-todo">Create todo</button></li><li><button id="create-project">Create Project</button></li><li><h3>Projects</h3></li>';
+
 
     for(let i = 0; i < Object.keys(projects).length; i++){
         const projectTab = document.createElement('button');
@@ -75,3 +77,4 @@ const display = (()=>{
         })
 
 })();
+
