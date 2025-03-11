@@ -1,22 +1,16 @@
 import {projects} from "./index.js"
 import Project from "./project.js"
 
-const display = (()=>{
+const displayProjects = ()=>{
     const lists = document.querySelector('#lists');
     const nav = document.querySelector('ul');
 
     for(let i = 0; i < Object.keys(projects).length; i++){
-        
-
-        // const projectTitle = projects[i].name;
-        // card.innerHTML = projectTitle;
-        // container.appendChild(card);
-
         const projectTab = document.createElement('button');
         const projectList = document.createElement('li');
 
         projectTab.innerHTML = Object.values(projects)[i].name;
-
+        
         projectTab.addEventListener('click', ()=>{
             const project = projects[projectTab.innerHTML];
             lists.textContent = '';
@@ -27,6 +21,26 @@ const display = (()=>{
                 lists.appendChild(card);
             })
         })
+
+        projectList.appendChild(projectTab);
+        nav.appendChild(projectList);
+    }
+}
+
+const display = (()=>{
+    displayProjects();
+
+        
+
+        // const projectTitle = projects[i].name;
+        // card.innerHTML = projectTitle;
+        // container.appendChild(card);
+
+        
+
+        
+
+        
 
         //create todo
         const todoButton = document.querySelector('#create-todo');
@@ -56,10 +70,8 @@ const display = (()=>{
             const projectTitle = document.querySelector('#project-title').value;
             const newProject = new Project(projectTitle);
             projects[projectTitle] = newProject;
+            displayProjects();
+            projectDialog.close();
         })
-
-        projectList.appendChild(projectTab);
-        nav.appendChild(projectList);
-    }
 
 })();
