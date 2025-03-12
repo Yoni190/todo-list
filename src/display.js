@@ -42,8 +42,21 @@ const displayProjects = ()=>{
     }
 }
 
+const populateSelectProject = () => {
+    const projectDrop = document.querySelector('#project-selection');
+    
+
+    Object.keys(projects).forEach((project) => {
+        const option = document.createElement('option');
+        option.innerHTML = project.charAt(0).toUpperCase() + project.slice(1);
+        option.value = project;
+        projectDrop.appendChild(option);
+    })
+}
+
 const display = (()=>{
     displayProjects();
+    populateSelectProject();
 
         
 
@@ -95,7 +108,7 @@ const display = (()=>{
             const todoDescription = document.querySelector('#description').value;
             const todoDate = document.querySelector('#dueDate').value;
             const todoPriority = document.querySelector('#priority').value;
-            const todoProject = document.querySelector('#projects').value;
+            const todoProject = document.querySelector('#project-selection').value;
 
             const newList = new List(todoTitle, todoDescription, todoDate, todoPriority);
             todoDialog.close();
