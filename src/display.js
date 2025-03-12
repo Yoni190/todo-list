@@ -4,15 +4,26 @@ import Project from "./project.js"
 const displayProjects = ()=>{
     const lists = document.querySelector('#lists');
     const nav = document.querySelector('ul');
-    nav.innerHTML = '<li><button id="create-todo">Create todo</button></li><li><button id="create-project">Create Project</button></li><li><h3>Projects</h3></li>';
+
+
+    //nav.innerHTML = '<li><button id="create-todo">Create todo</button></li><li><button id="create-project">Create Project</button></li><li><h3>Projects</h3></li>';
 
 
     for(let i = 0; i < Object.keys(projects).length; i++){
         const projectTab = document.createElement('button');
         const projectList = document.createElement('li');
 
-        projectTab.innerHTML = Object.values(projects)[i].name;
+
         
+        projectTab.innerHTML = Object.values(projects)[i].name;
+
+        //Does not allow repetition of projects
+        const children = nav.childElementCount;
+        if(children - 3 > i){
+            continue;
+        }
+        
+
         projectTab.addEventListener('click', ()=>{
             const project = projects[projectTab.innerHTML];
             lists.textContent = '';
@@ -26,6 +37,7 @@ const displayProjects = ()=>{
 
         projectList.appendChild(projectTab);
         nav.appendChild(projectList);
+        
     }
 }
 
