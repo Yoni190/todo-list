@@ -5,7 +5,7 @@ import "./style.css"
 //Change array to object and assign the name of the project as the key
 export const projects = {};
 
-class List {
+export default class List {
 
     //Future Note: Find way to insert class instance to a project inside this class
     constructor(title, description, dueDate, priority){

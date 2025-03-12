@@ -1,5 +1,6 @@
 import {projects} from "./index.js"
 import Project from "./project.js"
+import List from "./index.js"
 
 const displayProjects = ()=>{
     const lists = document.querySelector('#lists');
@@ -86,6 +87,18 @@ const display = (()=>{
             projects[projectTitle] = newProject;
             displayProjects();
             projectDialog.close();
+        })
+
+        const createTodo = document.querySelector('#todo-creation');
+        createTodo.addEventListener('click', ()=>{
+            const todoTitle = document.querySelector('#todo-title').value;
+            const todoDescription = document.querySelector('#description').value;
+            const todoDate = document.querySelector('#dueDate').value;
+            const todoPriority = document.querySelector('#priority').value;
+            const todoProject = document.querySelector('#projects').value;
+
+            const newList = new List(todoTitle, todoDescription, todoDate, todoPriority);
+            todoDialog.close();
         })
 
 })();
