@@ -111,6 +111,7 @@ const display = (()=>{
             const todoProject = document.querySelector('#project-selection').value;
 
             const newList = new List(todoTitle, todoDescription, todoDate, todoPriority);
+            projects[todoProject].addList(newList);
             todoDialog.close();
         })
 
