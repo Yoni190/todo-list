@@ -4,7 +4,7 @@ import List from "./index.js"
 
 //Stuff to add
 /*
-1. Message inside an empty project
+1. Done: Message inside an empty project
 2. Ability to delete todos
 3. Color based on priority
 4. Expand a selected todo to see details
@@ -45,18 +45,46 @@ const displayProjects = ()=>{
 
             project.lists.forEach((list)=>{
                 const card = document.createElement('div');
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-list';
+                deleteButton.innerHTML = 'Delete';
                 card.className = 'card';
-                card.innerHTML = `Title: ${list.title} <br> Due Date: ${list.dueDate}`;
+                card.id = `${project.name}_${list.title}`;
+
+                addDeleteFunctionality(deleteButton, list, project);
+
+                card.innerHTML = `Title: ${list.title} <br> Due Date: ${list.dueDate} <br>`;
+                card.appendChild(deleteButton);
                 lists.appendChild(card);
             })
         })
 
         projectList.appendChild(projectTab);
         nav.appendChild(projectList);
+
         
     }
 }
 
+const addDeleteFunctionality = (deleteButtons, list, project) => {
+    //const deleteButtons = document.querySelector('.delete-list');
+    // deleteButtons.forEach((deleteButton) => {
+    //     const card = deleteButton.parentElement;
+    //     deleteButton.addEventListener('click', () =>{
+    //         const stopIndex = card.id.indexOf('_');
+    //         const projectName = card.id.slice(0, stopIndex);
+    //         const todoName = card.id.slice(stopIndex);
+    //         console.log(`Project is ${projectName}`);
+    //         console.log(`Todo is ${todoName}`);
+
+    //         console.log("Suii")
+    //     });
+    // })
+    deleteButtons.addEventListener('click', ()=>{
+        project.deleteList(list);
+    })
+
+}
 const populateSelectProject = () => {
     const projectDrop = document.querySelector('#project-selection');
     projectDrop.innerHTML = '';
@@ -73,7 +101,6 @@ const populateSelectProject = () => {
 const display = (()=>{
     displayProjects();
     populateSelectProject();
-
         
 
         // const projectTitle = projects[i].name;
