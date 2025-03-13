@@ -2,12 +2,22 @@ import {projects} from "./index.js"
 import Project from "./project.js"
 import List from "./index.js"
 
+//Stuff to add
+/*
+1. Message inside an empty project
+2. Ability to delete todos
+3. Color based on priority
+4. Expand a selected todo to see details
+5. Ability to edit todos
+6. Load todos in the project after creating them without clicking on the button
+
+
+*/
+
 const displayProjects = ()=>{
     const lists = document.querySelector('#lists');
     const nav = document.querySelector('ul');
 
-
-    //nav.innerHTML = '<li><button id="create-todo">Create todo</button></li><li><button id="create-project">Create Project</button></li><li><h3>Projects</h3></li>';
 
 
     for(let i = 0; i < Object.keys(projects).length; i++){
@@ -28,6 +38,11 @@ const displayProjects = ()=>{
         projectTab.addEventListener('click', ()=>{
             const project = projects[projectTab.innerHTML];
             lists.textContent = '';
+
+            if(project.lists.length == 0){
+                lists.innerHTML = "Your project is empty! Create some todos";
+            }
+
             project.lists.forEach((list)=>{
                 const card = document.createElement('div');
                 card.className = 'card';

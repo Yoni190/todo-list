@@ -27,6 +27,8 @@ export default class List {
 
 const inbox = new Project('inbox');
 const test = new Project('test');
+const empty = new Project('empty');
+projects[empty.name] = empty;
 projects[inbox.name] = inbox;
 projects[test.name] = test;
 
