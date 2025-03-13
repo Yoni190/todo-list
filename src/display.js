@@ -101,6 +101,8 @@ const display = (()=>{
             projects[projectTitle] = newProject;
             displayProjects();
             populateSelectProject();
+            //Clear the title input after project creation
+            document.querySelector('#project-title').value = '';
             projectDialog.close();
         })
 
