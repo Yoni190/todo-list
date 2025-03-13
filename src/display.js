@@ -44,6 +44,7 @@ const displayProjects = ()=>{
 
 const populateSelectProject = () => {
     const projectDrop = document.querySelector('#project-selection');
+    projectDrop.innerHTML = '';
     
 
     Object.keys(projects).forEach((project) => {
