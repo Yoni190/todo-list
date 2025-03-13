@@ -99,6 +99,7 @@ const display = (()=>{
             const newProject = new Project(projectTitle);
             projects[projectTitle] = newProject;
             displayProjects();
+            populateSelectProject();
             projectDialog.close();
         })
 
