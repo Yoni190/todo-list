@@ -93,7 +93,6 @@ const display = (()=>{
             })
         });
 
-        //No access to project class
         const createProject = document.querySelector('#project-creation');
         createProject.addEventListener('click', ()=>{
             const projectTitle = document.querySelector('#project-title').value;
@@ -108,6 +107,8 @@ const display = (()=>{
 
         const createTodo = document.querySelector('#todo-creation');
         createTodo.addEventListener('click', ()=>{
+            const todoInput = document.querySelectorAll('.todo-input');
+
             const todoTitle = document.querySelector('#todo-title').value;
             const todoDescription = document.querySelector('#description').value;
             const todoDate = document.querySelector('#dueDate').value;
@@ -116,6 +117,10 @@ const display = (()=>{
 
             const newList = new List(todoTitle, todoDescription, todoDate, todoPriority);
             projects[todoProject].addList(newList);
+
+            todoInput.forEach((todo)=>{
+                todo.value = '';
+            });
             todoDialog.close();
         })
 
