@@ -5,14 +5,16 @@ import List from "./index.js"
 //Stuff to add
 /*
 1. Done: Message inside an empty project
-2. Ability to delete todos
+2. Done: Ability to delete todos
 3. Color based on priority
 4. Expand a selected todo to see details
 5. Ability to edit todos
 6. Load todos in the project after creating them without clicking on the button
+7. Separate to more classes
 
 
 */
+
 
 const displayProjects = ()=>{
     const lists = document.querySelector('#lists');
@@ -46,15 +48,22 @@ const displayProjects = ()=>{
             project.lists.forEach((list)=>{
                 const card = document.createElement('div');
                 const deleteButton = document.createElement('button');
+                const editButton = document.createElement('button');
+
+                editButton.className = 'edit-list';
+                editButton.innerHTML = 'Edit';
+
                 deleteButton.className = 'delete-list';
                 deleteButton.innerHTML = 'Delete';
+
                 card.className = 'card';
-                card.id = `${project.name}_${list.title}`;
 
                 addDeleteFunctionality(deleteButton, list, project);
+                addEditFunctionality(editButton)
 
                 card.innerHTML = `Title: ${list.title} <br> Due Date: ${list.dueDate} <br>`;
                 card.appendChild(deleteButton);
+                card.appendChild(editButton);
                 lists.appendChild(card);
             })
         })
@@ -66,21 +75,31 @@ const displayProjects = ()=>{
     }
 }
 
-const addDeleteFunctionality = (deleteButtons, list, project) => {
-    //const deleteButtons = document.querySelector('.delete-list');
-    // deleteButtons.forEach((deleteButton) => {
-    //     const card = deleteButton.parentElement;
-    //     deleteButton.addEventListener('click', () =>{
-    //         const stopIndex = card.id.indexOf('_');
-    //         const projectName = card.id.slice(0, stopIndex);
-    //         const todoName = card.id.slice(stopIndex);
-    //         console.log(`Project is ${projectName}`);
-    //         console.log(`Todo is ${todoName}`);
+//Edit Todos
+const addEditFunctionality = (editButton) => {
+    editButton.addEventListener('click', ()=>{
+        const createButton = document.querySelector('#todo-creation');
+        const cancelButton = document.querySelector('#cancel-list');
+        const editButton = document.createElement('button');
+        editButton.id = 'edit-button';
+        editButton.innerHTML = "Edit Todo";
+        const todoForm = document.querySelector('form');
+        const todoDialog = document.querySelector('dialog')
 
-    //         console.log("Suii")
-    //     });
-    // })
-    deleteButtons.addEventListener('click', ()=>{
+        todoForm.removeChild(createButton);
+        todoForm.appendChild(editButton);
+
+        editButton.addEventListener('click', ()=>{
+            console.log("Edited");
+        })
+
+        todoDialog.showModal();
+    })
+}
+
+//Delete Todos
+const addDeleteFunctionality = (deleteButton, list, project) => {
+    deleteButton.addEventListener('click', ()=>{
         project.deleteList(list);
     })
 
@@ -101,6 +120,8 @@ const populateSelectProject = () => {
 const display = (()=>{
     displayProjects();
     populateSelectProject();
+
+    
         
 
         // const projectTitle = projects[i].name;
@@ -164,7 +185,11 @@ const display = (()=>{
                 todo.value = '';
             });
             todoDialog.close();
-        })
+        });
+
+
 
 })();
+
+
 
