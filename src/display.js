@@ -59,7 +59,7 @@ const displayProjects = ()=>{
                 card.className = 'card';
 
                 addDeleteFunctionality(deleteButton, list, project);
-                addEditFunctionality(editButton)
+                addEditFunctionality(editButton, list);
 
                 card.innerHTML = `Title: ${list.title} <br> Due Date: ${list.dueDate} <br>`;
                 card.appendChild(deleteButton);
@@ -76,21 +76,34 @@ const displayProjects = ()=>{
 }
 
 //Edit Todos
-const addEditFunctionality = (editButton) => {
+const addEditFunctionality = (editButton, list) => {
     editButton.addEventListener('click', ()=>{
         const createButton = document.querySelector('#todo-creation');
         const cancelButton = document.querySelector('#cancel-list');
-        const editButton = document.createElement('button');
-        editButton.id = 'edit-button';
-        editButton.innerHTML = "Edit Todo";
+        const editedButton = document.createElement('button');
+        editedButton.id = 'edit-button';
+        editedButton.innerHTML = "Edit Todo";
+        editedButton.type = 'button';
         const todoForm = document.querySelector('form');
-        const todoDialog = document.querySelector('dialog')
+        const todoDialog = document.querySelector('dialog');
 
+        const todoTitle = document.querySelector('#todo-title');
+        todoTitle.value = list.title;
+
+        todoForm.appendChild(editedButton);
         todoForm.removeChild(createButton);
-        todoForm.appendChild(editButton);
+        
 
-        editButton.addEventListener('click', ()=>{
+        editedButton.addEventListener('click', ()=>{
+            todoForm.appendChild(createButton);
+            todoForm.removeChild(editedButton);
             console.log("Edited");
+            todoDialog.close();
+        })
+
+        cancelButton.addEventListener('click', ()=>{
+            todoForm.removeChild(editedButton);
+            todoForm.appendChild(createButton);
         })
 
         todoDialog.showModal();
