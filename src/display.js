@@ -102,12 +102,20 @@ const addEditFunctionality = (editButton, list) => {
         todoTitle.value = list.title;
         const todoDescription = document.querySelector('#description');
         todoDescription.value = list.description;
+        const todoDate = document.querySelector('#dueDate');
+        const todoPriority = document.querySelector('#priorities');
+        const todoProject = document.querySelector('#project-selection');
 
         todoForm.appendChild(editedButton);
         todoForm.removeChild(createButton);
         
 
         editedButton.addEventListener('click', ()=>{
+            list.title = todoTitle.value;
+            list.description = todoDescription.value;
+            list.dueDate = todoDate.value;
+            list.priority = todoPriority.value;
+            list.project = todoProject.value;
             todoForm.appendChild(createButton);
             todoForm.removeChild(editedButton);
             console.log("Edited");
