@@ -59,7 +59,7 @@ const displayProjects = ()=>{
                 card.className = 'card';
 
                 addDeleteFunctionality(deleteButton, list, project);
-                addEditFunctionality(editButton, list);
+                addEditFunctionality(editButton, list, project);
 
                 card.innerHTML = `Title: ${list.title} <br> Due Date: ${list.dueDate} <br>`;
                 card.appendChild(deleteButton);
@@ -86,8 +86,13 @@ const displayProjects = ()=>{
     }
 }
 
+const changeProject = (oldProject, newProject, list) => {
+    oldProject.deleteList(list);
+    projects[newProject].addList(list);
+}
+
 //Edit Todos
-const addEditFunctionality = (editButton, list) => {
+const addEditFunctionality = (editButton, list, project) => {
     editButton.addEventListener('click', ()=>{
         const createButton = document.querySelector('#todo-creation');
         const cancelButton = document.querySelector('#cancel-list');
@@ -115,7 +120,9 @@ const addEditFunctionality = (editButton, list) => {
             list.description = todoDescription.value;
             list.dueDate = todoDate.value;
             list.priority = todoPriority.value;
-            list.project = todoProject.value;
+            const previousProject = project;
+            const newProject = todoProject.value;
+            changeProject(previousProject, newProject, list);
             todoForm.appendChild(createButton);
             todoForm.removeChild(editedButton);
             console.log("Edited");
