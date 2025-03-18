@@ -8,7 +8,7 @@ import List from "./index.js"
 2. Done: Ability to delete todos
 3. Done: Color based on priority
 4. Expand a selected todo to see details
-5. Ability to edit todos
+5. Done: Ability to edit todos
 6. Load todos in the project after creating them without clicking on the button
 7. Separate to more classes
 
@@ -76,6 +76,10 @@ const displayProjects = ()=>{
                 else {
                     card.style.backgroundColor = 'red';
                 }
+
+                card.addEventListener('click', ()=>{
+                    expandCard(card, lists);
+                });
             })
         })
 
@@ -83,6 +87,27 @@ const displayProjects = ()=>{
         nav.appendChild(projectList);
 
         
+    }
+}
+
+const expandCard = (card, lists) => {
+    console.log(lists.children);
+    const cards = []
+
+    const listChildren = lists.children;
+
+    for(let i = 0; i < listChildren.length; i++){
+        if(listChildren[i] != card){
+            cards.push(listChildren[i]);
+            listChildren[i].parentNode.removeChild(listChildren[i]);
+            card.style.width = '100vh'
+            i = 0;
+        }
+    }
+
+    if(listChildren[0] != card){
+        cards.push(listChildren[0]);
+        listChildren[0].parentNode.removeChild(listChildren[0]);
     }
 }
 
