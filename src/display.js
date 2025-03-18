@@ -6,7 +6,7 @@ import List from "./index.js"
 /*
 1. Done: Message inside an empty project
 2. Done: Ability to delete todos
-3. Color based on priority
+3. Done: Color based on priority
 4. Expand a selected todo to see details
 5. Ability to edit todos
 6. Load todos in the project after creating them without clicking on the button
@@ -100,6 +100,8 @@ const addEditFunctionality = (editButton, list) => {
 
         const todoTitle = document.querySelector('#todo-title');
         todoTitle.value = list.title;
+        const todoDescription = document.querySelector('#description');
+        todoDescription.value = list.description;
 
         todoForm.appendChild(editedButton);
         todoForm.removeChild(createButton);
@@ -113,7 +115,6 @@ const addEditFunctionality = (editButton, list) => {
         })
 
         cancelButton.addEventListener('click', ()=>{
-            todoForm.removeChild(editedButton);
             todoForm.appendChild(createButton);
         })
 
