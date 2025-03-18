@@ -116,6 +116,8 @@ const addEditFunctionality = (editButton, list) => {
 
         cancelButton.addEventListener('click', ()=>{
             todoForm.appendChild(createButton);
+            todoTitle.value = '';
+            todoDescription.value = '';
         })
 
         todoDialog.showModal();
