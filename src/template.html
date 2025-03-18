@@ -27,7 +27,11 @@
                 <label for="dueDate">Due Date</label>
                 <input type="date" name="dueDate" id="dueDate" class="todo-input" required>
                 <label for="priority">Priority</label>
-                <input type="number" name="priority" id="priority" class="todo-input" required>
+                <select name="priorities" id="priorities">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
 
                 <label for="projects">Project</label>
                 <select name="projects" id="project-selection"></select>
