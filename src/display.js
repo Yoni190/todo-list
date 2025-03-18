@@ -65,6 +65,17 @@ const displayProjects = ()=>{
                 card.appendChild(deleteButton);
                 card.appendChild(editButton);
                 lists.appendChild(card);
+
+                card.style.color = 'white';
+                if(list.priority == 'low'){
+                    card.style.backgroundColor = 'green';
+                }
+                else if(list.priority == 'medium'){
+                    card.style.backgroundColor = 'orange';
+                }
+                else {
+                    card.style.backgroundColor = 'red';
+                }
             })
         })
 
@@ -188,7 +199,7 @@ const display = (()=>{
             const todoTitle = document.querySelector('#todo-title').value;
             const todoDescription = document.querySelector('#description').value;
             const todoDate = document.querySelector('#dueDate').value;
-            const todoPriority = document.querySelector('#priority').value;
+            const todoPriority = document.querySelector('#priorities').value;
             const todoProject = document.querySelector('#project-selection').value;
 
             const newList = new List(todoTitle, todoDescription, todoDate, todoPriority);

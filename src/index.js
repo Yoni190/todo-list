@@ -39,9 +39,9 @@ projects[test.name] = test;
 // projects.push(inbox);
 // projects.push(test);
 
-const list1 = new List('Jog', "Jog in the morning", 'Tomorrow', 1);
-const list2 = new List('Shopping', "Go buy fruits", 'Today', 2);
-const list3 = new List('Read', "Read 2 articles", 'Afternoon', 1);
+const list1 = new List('Jog', "Jog in the morning", 'Tomorrow', 'low');
+const list2 = new List('Shopping', "Go buy fruits", 'Today', 'medium');
+const list3 = new List('Read', "Read 2 articles", 'Afternoon', 'high');
 
 inbox.addList(list1)
 inbox.addList(list2)
