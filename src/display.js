@@ -88,6 +88,7 @@ const displayProjects = ()=>{
                         card.removeChild(document.querySelector('#card-description'));
                         card.removeChild(document.querySelector('#card-priority'));
                         card.style.height = '20vh';
+                        card.removeChild(minimizeButton);
                     })
                 });
             })
