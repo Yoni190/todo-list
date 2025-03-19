@@ -78,8 +78,17 @@ const displayProjects = ()=>{
                     card.style.backgroundColor = 'red';
                 }
 
-                card.addEventListener('click', ()=>{
+                card.addEventListener('dblclick', ()=>{
                     expandCard(card, lists, list);
+                    const minimizeButton = document.createElement('button');
+                    minimizeButton.innerHTML = 'Minimize';
+                    card.appendChild(minimizeButton);
+
+                    minimizeButton.addEventListener('click', ()=>{
+                        card.removeChild(document.querySelector('#card-description'));
+                        card.removeChild(document.querySelector('#card-priority'));
+                        card.style.height = '20vh';
+                    })
                 });
             })
         })
@@ -95,26 +104,20 @@ const expandCard = (card, lists, list) => {
     console.log(lists.children);
 
     const listChildren = lists.children;
-    const minimizeButton = document.createElement('button');
-    minimizeButton.innerHTML = 'Minimize';
-    card.appendChild(minimizeButton);
+    
     
 
     card.style.height = '45vh';
 
     const description = document.createElement('p');
+    description.id = 'card-description';
     const priority = document.createElement('p');
+    priority.id = 'card-priority';
     description.textContent = `Description: ${list.description}`;
     priority.textContent = `Priority: ${list.priority}`;
     card.appendChild(description);
     card.appendChild(priority);
 
-
-
-    minimizeButton.addEventListener('click', ()=>{
-        card.style.width = '100%';
-        lists.appendChild(listChildren[0])
-    })
 }
 
 
