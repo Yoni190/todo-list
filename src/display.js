@@ -51,6 +51,7 @@ const displayProjects = ()=>{
                 const editButton = document.createElement('button');
 
                 editButton.className = 'edit-list';
+                editButton.id = `edit-${list.title}`;
                 editButton.innerHTML = 'Edit';
 
                 deleteButton.className = 'delete-list';
@@ -78,7 +79,7 @@ const displayProjects = ()=>{
                 }
 
                 card.addEventListener('click', ()=>{
-                    expandCard(card, lists);
+                    expandCard(card, lists, list);
                 });
             })
         })
@@ -90,26 +91,32 @@ const displayProjects = ()=>{
     }
 }
 
-const expandCard = (card, lists) => {
+const expandCard = (card, lists, list) => {
     console.log(lists.children);
-    const cards = []
 
     const listChildren = lists.children;
+    const minimizeButton = document.createElement('button');
+    minimizeButton.innerHTML = 'Minimize';
+    card.appendChild(minimizeButton);
+    
 
-    for(let i = 0; i < listChildren.length; i++){
-        if(listChildren[i] != card){
-            cards.push(listChildren[i]);
-            listChildren[i].parentNode.removeChild(listChildren[i]);
-            card.style.width = '100vh'
-            i = 0;
-        }
-    }
+    card.style.height = '45vh';
 
-    if(listChildren[0] != card){
-        cards.push(listChildren[0]);
-        listChildren[0].parentNode.removeChild(listChildren[0]);
-    }
+    const description = document.createElement('p');
+    const priority = document.createElement('p');
+    description.textContent = `Description: ${list.description}`;
+    priority.textContent = `Priority: ${list.priority}`;
+    card.appendChild(description);
+    card.appendChild(priority);
+
+
+
+    minimizeButton.addEventListener('click', ()=>{
+        card.style.width = '100%';
+        lists.appendChild(listChildren[0])
+    })
 }
+
 
 const changeProject = (oldProject, newProject, list) => {
     oldProject.deleteList(list);
