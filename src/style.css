@@ -50,11 +50,13 @@ footer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 15%));
     gap: 10px;
+    height: 100vh;
 }
 
 .card {
     text-align: center;
     border-radius: 20px;
+    height: 20vh;
 }
 
 form {
