@@ -7,10 +7,11 @@ import List from "./index.js"
 1. Done: Message inside an empty project
 2. Done: Ability to delete todos
 3. Done: Color based on priority
-4. Expand a selected todo to see details
+4. Done: Expand a selected todo to see details
 5. Done: Ability to edit todos
 6. Load todos in the project after creating them without clicking on the button
 7. Separate to more classes
+8. Improve style
 
 
 */
@@ -29,6 +30,8 @@ const displayProjects = ()=>{
 
         
         projectTab.innerHTML = Object.values(projects)[i].name;
+        projectTab.id = projectTab.innerHTML;
+        
 
         //Does not allow repetition of projects
         const children = nav.childElementCount;
@@ -38,60 +41,7 @@ const displayProjects = ()=>{
         
 
         projectTab.addEventListener('click', ()=>{
-            const project = projects[projectTab.innerHTML];
-            lists.textContent = '';
-
-            if(project.lists.length == 0){
-                lists.innerHTML = "Your project is empty! Create some todos";
-            }
-
-            project.lists.forEach((list)=>{
-                const card = document.createElement('div');
-                const deleteButton = document.createElement('button');
-                const editButton = document.createElement('button');
-
-                editButton.className = 'edit-list';
-                editButton.id = `edit-${list.title}`;
-                editButton.innerHTML = 'Edit';
-
-                deleteButton.className = 'delete-list';
-                deleteButton.innerHTML = 'Delete';
-
-                card.className = 'card';
-
-                addDeleteFunctionality(deleteButton, list, project);
-                addEditFunctionality(editButton, list, project);
-
-                card.innerHTML = `Title: ${list.title} <br> Due Date: ${list.dueDate} <br>`;
-                card.appendChild(deleteButton);
-                card.appendChild(editButton);
-                lists.appendChild(card);
-
-                card.style.color = 'white';
-                if(list.priority == 'low'){
-                    card.style.backgroundColor = 'green';
-                }
-                else if(list.priority == 'medium'){
-                    card.style.backgroundColor = 'orange';
-                }
-                else {
-                    card.style.backgroundColor = 'red';
-                }
-
-                card.addEventListener('dblclick', ()=>{
-                    expandCard(card, lists, list);
-                    const minimizeButton = document.createElement('button');
-                    minimizeButton.innerHTML = 'Minimize';
-                    card.appendChild(minimizeButton);
-
-                    minimizeButton.addEventListener('click', ()=>{
-                        card.removeChild(document.querySelector('#card-description'));
-                        card.removeChild(document.querySelector('#card-priority'));
-                        card.style.height = '20vh';
-                        card.removeChild(minimizeButton);
-                    })
-                });
-            })
+            loadProjects(projectTab, lists);
         })
 
         projectList.appendChild(projectTab);
@@ -99,6 +49,63 @@ const displayProjects = ()=>{
 
         
     }
+}
+
+const loadProjects = (projectTab, lists) => {
+    const project = projects[projectTab.innerHTML];
+    lists.textContent = '';
+
+    if(project.lists.length == 0){
+        lists.innerHTML = "Your project is empty! Create some todos";
+    }
+
+    project.lists.forEach((list)=>{
+        const card = document.createElement('div');
+        const deleteButton = document.createElement('button');
+        const editButton = document.createElement('button');
+
+        editButton.className = 'edit-list';
+        editButton.id = `edit-${list.title}`;
+        editButton.innerHTML = 'Edit';
+
+        deleteButton.className = 'delete-list';
+        deleteButton.innerHTML = 'Delete';
+
+        card.className = 'card';
+
+        addDeleteFunctionality(deleteButton, list, project);
+        addEditFunctionality(editButton, list, project);
+
+        card.innerHTML = `Title: ${list.title} <br> Due Date: ${list.dueDate} <br>`;
+        card.appendChild(deleteButton);
+        card.appendChild(editButton);
+        lists.appendChild(card);
+
+        card.style.color = 'white';
+        if(list.priority == 'low'){
+            card.style.backgroundColor = 'green';
+        }
+        else if(list.priority == 'medium'){
+            card.style.backgroundColor = 'orange';
+        }
+        else {
+            card.style.backgroundColor = 'red';
+        }
+
+        card.addEventListener('dblclick', ()=>{
+            expandCard(card, lists, list);
+            const minimizeButton = document.createElement('button');
+            minimizeButton.innerHTML = 'Minimize';
+            card.appendChild(minimizeButton);
+
+            minimizeButton.addEventListener('click', ()=>{
+                card.removeChild(document.querySelector('#card-description'));
+                card.removeChild(document.querySelector('#card-priority'));
+                card.style.height = '20vh';
+                card.removeChild(minimizeButton);
+            })
+        });
+    })
 }
 
 const expandCard = (card, lists, list) => {
@@ -262,6 +269,11 @@ const display = (()=>{
             todoInput.forEach((todo)=>{
                 todo.value = '';
             });
+
+            const lists = document.querySelector('#lists');
+            const projectTab = document.querySelector(`#${todoProject}`);
+            loadProjects(projectTab, lists);
+            
             todoDialog.close();
         });
 
