@@ -168,15 +168,20 @@ const addEditFunctionality = (editButton, list, project) => {
             changeProject(previousProject, newProject, list);
             todoForm.appendChild(createButton);
             todoForm.removeChild(editedButton);
-            console.log("Edited");
+            
+            const lists = document.querySelector('#lists');
+            const projectTab = document.querySelector(`#${todoProject.value}`);
+            loadProjects(projectTab, lists);
             todoDialog.close();
-        })
+        });
 
         cancelButton.addEventListener('click', ()=>{
             todoForm.appendChild(createButton);
             todoTitle.value = '';
             todoDescription.value = '';
-        })
+        });
+
+        
 
         todoDialog.showModal();
     })
