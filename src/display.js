@@ -186,6 +186,10 @@ const addEditFunctionality = (editButton, list, project) => {
 const addDeleteFunctionality = (deleteButton, list, project) => {
     deleteButton.addEventListener('click', ()=>{
         project.deleteList(list);
+
+        const lists = document.querySelector('#lists');
+        const projectTab = document.querySelector(`#${project.name}`);
+        loadProjects(projectTab, lists);
     })
 
 }
@@ -273,7 +277,7 @@ const display = (()=>{
             const lists = document.querySelector('#lists');
             const projectTab = document.querySelector(`#${todoProject}`);
             loadProjects(projectTab, lists);
-            
+
             todoDialog.close();
         });
 
