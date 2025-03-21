@@ -172,6 +172,9 @@ const addEditFunctionality = (editButton, list, project) => {
             const lists = document.querySelector('#lists');
             const projectTab = document.querySelector(`#${todoProject.value}`);
             loadProjects(projectTab, lists);
+
+            todoTitle.value = '';
+            todoDescription.value = '';
             todoDialog.close();
         });
 
@@ -181,6 +184,7 @@ const addEditFunctionality = (editButton, list, project) => {
             todoDescription.value = '';
         });
 
+        
         
 
         todoDialog.showModal();
