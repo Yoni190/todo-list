@@ -11,7 +11,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-            "date-fns-locale": path.dirname(require.resolve("date-fns/package.json")),
+            "date-fns-locale": path.dirname(require.resolve("./node-modules/date-fns/package.json")),
         }
     },
     plugins: [

@@ -1,6 +1,7 @@
 import {projects} from "./list.js"
 import Project from "./project.js"
 import List from "./list.js"
+import {formatDistanceToNow} from "../node_modules/date-fns"
 
 //Stuff to add
 /*
@@ -76,7 +77,7 @@ const loadProjects = (projectTab, lists) => {
         addDeleteFunctionality(deleteButton, list, project);
         addEditFunctionality(editButton, list, project);
 
-        card.innerHTML = `Title: ${list.title} <br> Due Date: ${list.dueDate} <br>`;
+        card.innerHTML = `Title: ${list.title} <br> Due Date: Due in ${list.dueDate} <br>`;
         card.appendChild(deleteButton);
         card.appendChild(editButton);
         lists.appendChild(card);
@@ -266,11 +267,15 @@ const display = (()=>{
 
             const todoTitle = document.querySelector('#todo-title').value;
             const todoDescription = document.querySelector('#description').value;
-            const todoDate = document.querySelector('#dueDate').value;
+            const todoDate = new Date(document.querySelector('#dueDate').value);
+
+            const todoDue = formatDistanceToNow(
+                new Date(todoDate.getFullYear(), todoDate.getMonth(), todoDate.getDate())
+            );
             const todoPriority = document.querySelector('#priorities').value;
             const todoProject = document.querySelector('#project-selection').value;
 
-            const newList = new List(todoTitle, todoDescription, todoDate, todoPriority);
+            const newList = new List(todoTitle, todoDescription, todoDue, todoPriority);
             projects[todoProject].addList(newList);
 
             todoInput.forEach((todo)=>{
@@ -280,6 +285,7 @@ const display = (()=>{
             const lists = document.querySelector('#lists');
             const projectTab = document.querySelector(`#${todoProject}`);
             loadProjects(projectTab, lists);
+
 
             todoDialog.close();
         });
