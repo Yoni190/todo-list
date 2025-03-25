@@ -1,6 +1,7 @@
 import {projects} from "./list.js"
 import Project from "./project.js"
 import List from "./list.js"
+import {saveProjects} from "./storage.js"
 import {formatDistanceToNow} from "../node_modules/date-fns"
 
 //Stuff to add
@@ -19,18 +20,23 @@ import {formatDistanceToNow} from "../node_modules/date-fns"
 
 
 const displayProjects = ()=>{
+    if(!localStorage.getItem('projects')){
+        setDefaultProjects();
+    }
     const lists = document.querySelector('#lists');
     const nav = document.querySelector('ul');
+    const storedProjects = JSON.parse(localStorage.getItem('projects'));
 
 
 
-    for(let i = 0; i < Object.keys(projects).length; i++){
+    for(let i = 0; i < Object.keys(storedProjects).length; i++){
         const projectTab = document.createElement('button');
         const projectList = document.createElement('li');
+        
 
 
         
-        projectTab.innerHTML = Object.values(projects)[i].name;
+        projectTab.innerHTML = Object.values(storedProjects)[i].name;
         projectTab.id = projectTab.innerHTML;
         
 
@@ -52,8 +58,13 @@ const displayProjects = ()=>{
     }
 }
 
+const setDefaultProjects = () => {
+    localStorage.setItem('projects', JSON.stringify(projects));
+}
+
 const loadProjects = (projectTab, lists) => {
-    const project = projects[projectTab.innerHTML];
+    const storedProjects = JSON.parse(localStorage.getItem('projects'));
+    const project = storedProjects[projectTab.innerHTML];
     lists.textContent = '';
 
     if(project.lists.length == 0){
@@ -126,7 +137,7 @@ const expandCard = (card, lists, list) => {
 
 const changeProject = (oldProject, newProject, list) => {
     oldProject.deleteList(list);
-    projects[newProject].addList(list);
+    localStorage.getItem(JSON.parse('projects'))[newProject].addList(list);
 }
 
 //Edit Todos
@@ -200,9 +211,10 @@ const addDeleteFunctionality = (deleteButton, list, project) => {
 const populateSelectProject = () => {
     const projectDrop = document.querySelector('#project-selection');
     projectDrop.innerHTML = '';
+    const storedProjects = localStorage.getItem(JSON.parse('projects'));
     
 
-    Object.keys(projects).forEach((project) => {
+    Object.keys(storedProjects).forEach((project) => {
         const option = document.createElement('option');
         option.innerHTML = project.charAt(0).toUpperCase() + project.slice(1);
         option.value = project;
@@ -251,18 +263,22 @@ const display = (()=>{
 
         const createProject = document.querySelector('#project-creation');
         createProject.addEventListener('click', ()=>{
+            const storedProjects = localStorage.getItem(JSON.parse('projects'));
             const projectTitle = document.querySelector('#project-title').value;
             const newProject = new Project(projectTitle);
-            projects[projectTitle] = newProject;
+            storedProjects[projectTitle] = newProject;
             displayProjects();
             populateSelectProject();
             //Clear the title input after project creation
             document.querySelector('#project-title').value = '';
+            
+            saveProjects(storedProjects);
             projectDialog.close();
         })
 
         const createTodo = document.querySelector('#todo-creation');
         createTodo.addEventListener('click', ()=>{
+            const storedProjects = localStorage.getItem(JSON.parse('projects'));
             const todoInput = document.querySelectorAll('.todo-input');
 
             const todoTitle = document.querySelector('#todo-title').value;
@@ -276,7 +292,7 @@ const display = (()=>{
             const todoProject = document.querySelector('#project-selection').value;
 
             const newList = new List(todoTitle, todoDescription, todoDue, todoPriority);
-            projects[todoProject].addList(newList);
+            storedProjects[todoProject].addList(newList);
 
             todoInput.forEach((todo)=>{
                 todo.value = '';
