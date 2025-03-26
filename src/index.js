@@ -137,7 +137,8 @@ const expandCard = (card, lists, list) => {
 
 const changeProject = (oldProject, newProject, list) => {
     oldProject.deleteList(list);
-    localStorage.getItem(JSON.parse('projects'))[newProject].addList(list);
+    JSON.parse(localStorage.getItem('projects'))[newProject].addList(list);
+    // localStorage.getItem(JSON.parse('projects'))[newProject].addList(list);
 }
 
 //Edit Todos
@@ -211,7 +212,7 @@ const addDeleteFunctionality = (deleteButton, list, project) => {
 const populateSelectProject = () => {
     const projectDrop = document.querySelector('#project-selection');
     projectDrop.innerHTML = '';
-    const storedProjects = localStorage.getItem(JSON.parse('projects'));
+    const storedProjects = JSON.parse(localStorage.getItem('projects'));
     
 
     Object.keys(storedProjects).forEach((project) => {
@@ -263,22 +264,22 @@ const display = (()=>{
 
         const createProject = document.querySelector('#project-creation');
         createProject.addEventListener('click', ()=>{
-            const storedProjects = localStorage.getItem(JSON.parse('projects'));
+            const storedProjects = JSON.parse(localStorage.getItem('projects'));
             const projectTitle = document.querySelector('#project-title').value;
             const newProject = new Project(projectTitle);
             storedProjects[projectTitle] = newProject;
+            saveProjects(storedProjects);
             displayProjects();
             populateSelectProject();
             //Clear the title input after project creation
             document.querySelector('#project-title').value = '';
-            
-            saveProjects(storedProjects);
+        
             projectDialog.close();
         })
 
         const createTodo = document.querySelector('#todo-creation');
         createTodo.addEventListener('click', ()=>{
-            const storedProjects = localStorage.getItem(JSON.parse('projects'));
+            const storedProjects = JSON.parse(localStorage.getItem('projects'));
             const todoInput = document.querySelectorAll('.todo-input');
 
             const todoTitle = document.querySelector('#todo-title').value;
@@ -292,7 +293,8 @@ const display = (()=>{
             const todoProject = document.querySelector('#project-selection').value;
 
             const newList = new List(todoTitle, todoDescription, todoDue, todoPriority);
-            storedProjects[todoProject].addList(newList);
+            projects[todoProject].addList(newList);
+            saveProjects(projects);
 
             todoInput.forEach((todo)=>{
                 todo.value = '';
