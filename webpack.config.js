@@ -1,3 +1,4 @@
+// import webpack from "webpack"
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -9,19 +10,19 @@ module.exports = {
         path: path.resolve(__dirname, "dist"),
         clean: true
     },
-    resolve: {
-        alias: {
-            "date-fns-locale": path.dirname(require.resolve("./node-modules/date-fns/package.json")),
-        }
-    },
+    // resolve: {
+    //     alias: {
+    //         "date-fns-locale": path.dirname(require.resolve("./node_modules/date-fns/package.json")),
+    //     }
+    // },
     plugins: [
         new HtmlWebpackPlugin({
             template: "./src/template.html"
         }),
-        new webpack.ContextReplacementPlugin(
-            /date-fns[/\\]locale/,
-            new RegExp(`(${locales.join("|")})\.js$}`)
-        ),
+        // new webpack.ContextReplacementPlugin(
+        //     /date-fns[/\\]locale/,
+        //     new RegExp(`(${locales.join("|")})\.js$}`)
+        // ),
     ],
     module: {
         rules: [
