@@ -223,9 +223,23 @@ const populateSelectProject = () => {
     })
 }
 
+const setPrototypeOfStorage = (storedProjects) => {
+    for(const key in storedProjects){
+        Object.setPrototypeOf(storedProjects[key], projects['empty'])
+    }
+}
+
 const display = (()=>{
     displayProjects();
     populateSelectProject();
+
+    const storedProjects = JSON.parse(localStorage.getItem('projects'))
+    console.log(Object.getPrototypeOf(projects['inbox']))
+    console.log(Object.getPrototypeOf(storedProjects['inbox']));
+
+    console.log(projects)
+    console.log(storedProjects)
+    // //console.log(Object.getPrototypeOf(projects))
 
     
         
@@ -262,12 +276,17 @@ const display = (()=>{
             })
         });
 
+
+        
         const createProject = document.querySelector('#project-creation');
         createProject.addEventListener('click', ()=>{
             const storedProjects = JSON.parse(localStorage.getItem('projects'));
             const projectTitle = document.querySelector('#project-title').value;
             const newProject = new Project(projectTitle);
             storedProjects[projectTitle] = newProject;
+
+            
+            console.log(storedProjects)
             saveProjects(storedProjects);
             displayProjects();
             populateSelectProject();
@@ -293,8 +312,9 @@ const display = (()=>{
             const todoProject = document.querySelector('#project-selection').value;
 
             const newList = new List(todoTitle, todoDescription, todoDue, todoPriority);
-            projects[todoProject].addList(newList);
-            saveProjects(projects);
+            setPrototypeOfStorage(storedProjects);
+            storedProjects[todoProject].addList(newList);
+            saveProjects(storedProjects);
 
             todoInput.forEach((todo)=>{
                 todo.value = '';
