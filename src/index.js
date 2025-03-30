@@ -64,6 +64,7 @@ const setDefaultProjects = () => {
 
 const loadProjects = (projectTab, lists) => {
     const storedProjects = JSON.parse(localStorage.getItem('projects'));
+    setPrototypeOfStorage(storedProjects);
     const project = storedProjects[projectTab.innerHTML];
     lists.textContent = '';
 
@@ -85,7 +86,7 @@ const loadProjects = (projectTab, lists) => {
 
         card.className = 'card';
 
-        addDeleteFunctionality(deleteButton, list, project);
+        addDeleteFunctionality(deleteButton, list, project, storedProjects);
         addEditFunctionality(editButton, list, project);
 
         card.innerHTML = `Title: ${list.title} <br> Due Date: Due in ${list.dueDate} <br>`;
@@ -199,9 +200,11 @@ const addEditFunctionality = (editButton, list, project) => {
 }
 
 //Delete Todos
-const addDeleteFunctionality = (deleteButton, list, project) => {
+const addDeleteFunctionality = (deleteButton, list, project, storedProjects) => {
     deleteButton.addEventListener('click', ()=>{
+        console.log("hello")
         project.deleteList(list);
+        saveProjects(storedProjects);
 
         const lists = document.querySelector('#lists');
         const projectTab = document.querySelector(`#${project.name}`);
@@ -225,7 +228,7 @@ const populateSelectProject = () => {
 
 const setPrototypeOfStorage = (storedProjects) => {
     for(const key in storedProjects){
-        Object.setPrototypeOf(storedProjects[key], projects['empty'])
+        Object.setPrototypeOf(storedProjects[key], projects['inbox'])
     }
 }
 
@@ -234,11 +237,11 @@ const display = (()=>{
     populateSelectProject();
 
     const storedProjects = JSON.parse(localStorage.getItem('projects'))
-    console.log(Object.getPrototypeOf(projects['inbox']))
-    console.log(Object.getPrototypeOf(storedProjects['inbox']));
+    // console.log(Object.getPrototypeOf(projects['inbox']))
+    // console.log(Object.getPrototypeOf(storedProjects['inbox']));
 
-    console.log(projects)
-    console.log(storedProjects)
+    // console.log(projects)
+    // console.log(storedProjects)
     // //console.log(Object.getPrototypeOf(projects))
 
     
