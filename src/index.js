@@ -87,7 +87,7 @@ const loadProjects = (projectTab, lists) => {
         card.className = 'card';
 
         addDeleteFunctionality(deleteButton, list, project, storedProjects);
-        addEditFunctionality(editButton, list, project);
+        addEditFunctionality(editButton, list, project, storedProjects);
 
         card.innerHTML = `Title: ${list.title} <br> Due Date: Due in ${list.dueDate} <br>`;
         card.appendChild(deleteButton);
@@ -137,13 +137,19 @@ const expandCard = (card, lists, list) => {
 
 
 const changeProject = (oldProject, newProject, list) => {
-    oldProject.deleteList(list);
-    JSON.parse(localStorage.getItem('projects'))[newProject].addList(list);
+    // oldProject.deleteList(list);
+    const storedProjects = JSON.parse(localStorage.getItem('projects'));
+    setPrototypeOfStorage(storedProjects);
+    
+    storedProjects[oldProject.name].deleteList(list);
+    storedProjects[newProject].addList(list);
+    
+    saveProjects(storedProjects)
     // localStorage.getItem(JSON.parse('projects'))[newProject].addList(list);
 }
 
 //Edit Todos
-const addEditFunctionality = (editButton, list, project) => {
+const addEditFunctionality = (editButton, list, project, storedProjects) => {
     editButton.addEventListener('click', ()=>{
         const createButton = document.querySelector('#todo-creation');
         const cancelButton = document.querySelector('#cancel-list');
@@ -193,7 +199,6 @@ const addEditFunctionality = (editButton, list, project) => {
         });
 
         
-        
 
         todoDialog.showModal();
     })
@@ -202,7 +207,6 @@ const addEditFunctionality = (editButton, list, project) => {
 //Delete Todos
 const addDeleteFunctionality = (deleteButton, list, project, storedProjects) => {
     deleteButton.addEventListener('click', ()=>{
-        console.log("hello")
         project.deleteList(list);
         saveProjects(storedProjects);
 
@@ -228,7 +232,7 @@ const populateSelectProject = () => {
 
 const setPrototypeOfStorage = (storedProjects) => {
     for(const key in storedProjects){
-        Object.setPrototypeOf(storedProjects[key], projects['inbox'])
+        Object.setPrototypeOf(storedProjects[key], projects['empty'])
     }
 }
 
@@ -289,7 +293,6 @@ const display = (()=>{
             storedProjects[projectTitle] = newProject;
 
             
-            console.log(storedProjects)
             saveProjects(storedProjects);
             displayProjects();
             populateSelectProject();
