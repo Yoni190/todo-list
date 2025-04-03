@@ -141,7 +141,9 @@ const changeProject = (oldProject, newProject, list) => {
     const storedProjects = JSON.parse(localStorage.getItem('projects'));
     setPrototypeOfStorage(storedProjects);
     
-    storedProjects[oldProject.name].deleteList(list);
+    console.log(`Old: ${oldProject.name}`)
+    console.log(`New: ${newProject}`)
+    deleteList(list, oldProject, storedProjects);
     storedProjects[newProject].addList(list);
     
     saveProjects(storedProjects)
@@ -207,15 +209,20 @@ const addEditFunctionality = (editButton, list, project, storedProjects) => {
 //Delete Todos
 const addDeleteFunctionality = (deleteButton, list, project, storedProjects) => {
     deleteButton.addEventListener('click', ()=>{
+        deleteList(list, project, storedProjects);
+    })
+
+}
+
+const deleteList = (list, project, storedProjects) => {
         project.deleteList(list);
         saveProjects(storedProjects);
 
         const lists = document.querySelector('#lists');
         const projectTab = document.querySelector(`#${project.name}`);
         loadProjects(projectTab, lists);
-    })
-
 }
+
 const populateSelectProject = () => {
     const projectDrop = document.querySelector('#project-selection');
     projectDrop.innerHTML = '';

@@ -9,6 +9,7 @@ export default class Project {
     }
 
     deleteList(list){
+        console.log(list)
         this.lists.splice(this.lists.indexOf(list), 1);
     }
 
