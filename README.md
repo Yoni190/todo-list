@@ -16,3 +16,5 @@ Technologies Used
 -npm: Dependency management.
 -date-fns: Date manipulation and formatting.
 -localStorage: Persistent task storage across sessions.
+
+Live Preview: https://yoni190.github.io/todo-list/
