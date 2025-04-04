@@ -3,6 +3,7 @@ import Project from "./project.js"
 import List from "./list.js"
 import {saveProjects} from "./storage.js"
 import {formatDistanceToNow} from "../node_modules/date-fns"
+import { is } from "date-fns/locale"
 
 
 const displayProjects = ()=>{
@@ -40,7 +41,6 @@ const displayProjects = ()=>{
         projectList.appendChild(projectTab);
         nav.appendChild(projectList);
 
-        
     }
 }
 
@@ -94,15 +94,27 @@ const loadProjects = (projectTab, lists) => {
         card.addEventListener('dblclick', ()=>{
             expandCard(card, lists, list);
             const minimizeButton = document.createElement('button');
+            const setComplete = document.createElement('button');
             minimizeButton.innerHTML = 'Minimize';
+            setComplete.innerHTML = "Complete Task";
             card.appendChild(minimizeButton);
+            card.appendChild(setComplete);
 
             minimizeButton.addEventListener('click', ()=>{
                 card.removeChild(document.querySelector('#card-description'));
                 card.removeChild(document.querySelector('#card-priority'));
+                card.removeChild(document.querySelector('#card-completion'));
                 card.style.height = '20vh';
                 card.removeChild(minimizeButton);
+                card.removeChild(setComplete);
             })
+
+            setComplete.addEventListener('click', ()=>{
+                list.status = 'Complete';
+                saveProjects(storedProjects);
+                loadProjects(projectTab, lists);
+            })
+
         });
     })
 }
@@ -114,11 +126,14 @@ const expandCard = (card, lists, list) => {
     description.id = 'card-description';
     const priority = document.createElement('p');
     priority.id = 'card-priority';
+    const isComplete = document.createElement('p');
+    isComplete.id = 'card-completion';
     description.textContent = `Description: ${list.description}`;
     priority.textContent = `Priority: ${list.priority}`;
+    isComplete.textContent = `Completion Status: ${list.status}`;
     card.appendChild(description);
     card.appendChild(priority);
-
+    card.appendChild(isComplete);
 }
 
 
@@ -285,6 +300,8 @@ const display = (()=>{
             const todoProject = document.querySelector('#project-selection').value;
 
             const newList = new List(todoTitle, todoDescription, todoDue, todoPriority);
+            
+            console.log(Object.getPrototypeOf(newList))
             setPrototypeOfStorage(storedProjects);
             storedProjects[todoProject].addList(newList);
             saveProjects(storedProjects);
