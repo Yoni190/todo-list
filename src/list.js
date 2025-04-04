@@ -26,18 +26,8 @@ export default class List {
 }
 
 const inbox = new Project('inbox');
-const test = new Project('test');
-const empty = new Project('empty');
-projects[empty.name] = empty;
 projects[inbox.name] = inbox;
-projects[test.name] = test;
 
-// projects.push(inbox);
-// projects.push(test);
-// projects.push(inbox);
-// projects.push(test);
-// projects.push(inbox);
-// projects.push(test);
 
 const list1 = new List('Jog', "Jog in the morning", 'Tomorrow', 'low');
 const list2 = new List('Shopping', "Go buy fruits", 'Today', 'medium');
@@ -46,8 +36,4 @@ const list3 = new List('Read', "Read 2 articles", 'Afternoon', 'high');
 inbox.addList(list1)
 inbox.addList(list2)
 inbox.addList(list3)
-
-
-
-test.addList(list3)
 

@@ -4,20 +4,6 @@ import List from "./list.js"
 import {saveProjects} from "./storage.js"
 import {formatDistanceToNow} from "../node_modules/date-fns"
 
-//Stuff to add
-/*
-1. Done: Message inside an empty project
-2. Done: Ability to delete todos
-3. Done: Color based on priority
-4. Done: Expand a selected todo to see details
-5. Done: Ability to edit todos
-6. Done: Load todos in the project after creating them without clicking on the button
-7. Separate to more classes
-8. Improve style
-
-
-*/
-
 
 const displayProjects = ()=>{
     if(!localStorage.getItem('projects')){
@@ -137,17 +123,10 @@ const expandCard = (card, lists, list) => {
 
 
 const changeProject = (oldProject, newProject, list, storedProjects) => {
-    // oldProject.deleteList(list);
-    // const storedProjects = JSON.parse(localStorage.getItem('projects'));
-    // setPrototypeOfStorage(storedProjects);
-    
-    console.log(`Old: ${oldProject.name}`)
-    console.log(`New: ${newProject}`)
     deleteList(list, oldProject, storedProjects);
     storedProjects[newProject].addList(list);
     
     saveProjects(storedProjects)
-    // localStorage.getItem(JSON.parse('projects'))[newProject].addList(list);
 }
 
 //Edit Todos
@@ -239,7 +218,7 @@ const populateSelectProject = () => {
 
 const setPrototypeOfStorage = (storedProjects) => {
     for(const key in storedProjects){
-        Object.setPrototypeOf(storedProjects[key], projects['empty'])
+        Object.setPrototypeOf(storedProjects[key], projects['inbox'])
     }
 }
 
@@ -248,25 +227,6 @@ const display = (()=>{
     populateSelectProject();
 
     const storedProjects = JSON.parse(localStorage.getItem('projects'))
-    // console.log(Object.getPrototypeOf(projects['inbox']))
-    // console.log(Object.getPrototypeOf(storedProjects['inbox']));
-
-    // console.log(projects)
-    // console.log(storedProjects)
-    // //console.log(Object.getPrototypeOf(projects))
-
-    
-        
-
-        // const projectTitle = projects[i].name;
-        // card.innerHTML = projectTitle;
-        // container.appendChild(card);
-
-        
-
-        
-
-        
 
         //create todo
         const todoButton = document.querySelector('#create-todo');
