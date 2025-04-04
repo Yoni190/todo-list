@@ -136,10 +136,10 @@ const expandCard = (card, lists, list) => {
 }
 
 
-const changeProject = (oldProject, newProject, list) => {
+const changeProject = (oldProject, newProject, list, storedProjects) => {
     // oldProject.deleteList(list);
-    const storedProjects = JSON.parse(localStorage.getItem('projects'));
-    setPrototypeOfStorage(storedProjects);
+    // const storedProjects = JSON.parse(localStorage.getItem('projects'));
+    // setPrototypeOfStorage(storedProjects);
     
     console.log(`Old: ${oldProject.name}`)
     console.log(`New: ${newProject}`)
@@ -181,7 +181,7 @@ const addEditFunctionality = (editButton, list, project, storedProjects) => {
             list.priority = todoPriority.value;
             const previousProject = project;
             const newProject = todoProject.value;
-            changeProject(previousProject, newProject, list);
+            changeProject(previousProject, newProject, list, storedProjects);
             todoForm.appendChild(createButton);
             todoForm.removeChild(editedButton);
             
